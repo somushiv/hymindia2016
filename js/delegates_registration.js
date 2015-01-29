@@ -1,3 +1,4 @@
+//Delegates Registration Form JS file
 $( document ).ready(function() {
 $('#delegates_mode').hide();
 
