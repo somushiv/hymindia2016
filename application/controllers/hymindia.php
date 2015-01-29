@@ -29,11 +29,55 @@ class Hymindia extends CI_Controller {
 		}
 		public function eventdetails(){
 			$this->load->helper("form");
-			 
-			$data['environment']=ENVIRONMENT;			
-			$this->template->write_view("content","hym_homepage",$data);
+			$data['environment']=ENVIRONMENT;	
+		$errorMessage=$this->session->flashdata('errormessage');
+        if (!empty($errorMessage)){
+            $data['errorMessage']=$errorMessage;        
+           $this->template->write_view("content","hym_homepage",$data);
+        }else{
+            $this->template->write_view("content","hym_homepage");
+        } 
+					
+			
 			$this->template->render();
 		}
+		 public function loginscreen(){
+        $errorMessage=$this->session->flashdata('errormessage');
+        if (!empty($errorMessage)){
+            $data['errorMessage']=$errorMessage;        
+            $this->template->write_view("content","login",$data);
+        }else{
+            $this->template->write_view("content","login");
+        }
+        
+        $this->template->render();
+    }
+     public function processform($value=''){
+         
+         $this->load->library("app_auth");
+         $loginReturn=$this->app_auth->checkUser($_POST['delegates_emailid'],$_POST['delegates_password']);
+         
+         if ($loginReturn==true){
+             redirect("/dashboard");
+         }else{
+             $this->session->set_flashdata('errormessage', "Invalid Username/Password");
+             redirect("/");
+         }
+         
+     }
+    public function logout(){
+        $this->load->library("session");
+        $this->session->sess_destroy();
+        redirect($this->config->item('base_url'));
+    }
+    public function hym_displayinfo(){
+    	$data['errorMessage']=$this->session->userdata('registration_email_session');
+    	$this->session->unset_userdata('registration_email_session');
+    	   
+        $this->template->write_view("content","hym_displayinfo",$data);
+        $this->template->render();
+    }
+    
 		/*
 		 * Registration Form Validation
 		 * Indian Registration = 1

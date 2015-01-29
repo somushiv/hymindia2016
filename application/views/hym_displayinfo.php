@@ -4,33 +4,14 @@
 </div>
  <div class="col-xs-3 col-md-3 ">
  	<div class="panel panel-default homepage-loginblock">
- 		<div class="panel-heading">User Login</div>
- 		 <?php
+ 		
+ 		 
+ 		 <div class="panel-body" style="text-align:center">
+ 		 	<?php
             if (!empty($errorMessage))
                 echo "<div class='alert alert-warning' style='margin-bottom:0px;text-algin:center'>{$errorMessage}</div>";
             ?>
- 		 <div class="panel-body">
- 		<form method="post" action="/hymindia/processform" id="loginform" class="form-horizontal">
- <div class="input-group">
-
-<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
-  
-  <input type="input" class="form-control" name="delegates_emailid" placeholder="email id"/>
-  
- </div>
-
- <div class="input-group">
-<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
-  
-  <input type="password" class="form-control" name="delegates_password" placeholder="password"/>
-  
- </div>
- 
-  
-  <input type="submit" class="form-control btn btn-primary" name="delegate-password" placeholder="password"/>
-  
- 	
- 		</form>
+ 			<a href="/" class="btn btn-primary">Home</a>	
  			</div>
  			<div class="panel-footer">
  		<a href="/delegate_registration">Register Now</a> | <a href="/hymindia/resetpassword">Reset Password</a>

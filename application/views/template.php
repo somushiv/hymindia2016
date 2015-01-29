@@ -24,7 +24,7 @@ header("Pragma: no-cache");
     <meta name="apple-mobile-web-app-capable" content="yes"> 
     
 	<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+	<!--  <link href="/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" /> -->
 	
 	
 
@@ -40,29 +40,20 @@ header("Pragma: no-cache");
      
       <img src="/images/hym_inida_logo.png" alt="HYM India 2016" title="HYM India 2016" />
     </div>
+    <?php 
+       
+        if (!empty($loginuser)){
+    ?>     
     <nav class="collapse navbar-collapse bs-navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li class="active">
-          <a href="../getting-started/">Getting started</a>
-        </li>
-        <li>
-          <a href="../css/">CSS</a>
-        </li>
-        <li>
-          <a href="../components/">Components</a>
-        </li>
-        <li>
-          <a href="../javascript/">JavaScript</a>
-        </li>
-        <li>
-          <a href="../customize/">Customize</a>
-        </li>
-      </ul>
+      
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="http://expo.getbootstrap.com" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');">Expo</a></li>
-        <li><a href="http://blog.getbootstrap.com" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Blog');">Blog</a></li>
+        
+        <li><a href="/hymindia/logout" >Logout</a></li>
       </ul>
     </nav>
+    <?php 
+        }
+    ?>
   </div>
 </header>
 

@@ -20,7 +20,27 @@
         $this->ci=& get_instance();
     }
      
-     
+    function getDelegateData($delegates_id=0){
+    	$queryObject=$this->ci->db->query("select * from tbl_delegates where delegates_id={$delegates_id}");
+    	return $queryObject->row();
+    }
+    function validateProfile($queryRow){
+    	$return=true;
+    	if (empty($queryRow->delegates_address1)){
+    		$return=false;
+    	}
+    	if (empty($queryRow->delegates_postalcode)){
+    		$return=false;
+    	}
+   		 if (empty($queryRow->delegates_country)){
+    		$return=false;
+    	}
+    	if (empty($queryRow->delegates_food_prefrence)){
+    		$return=false;
+    	}
+    	return $return;
+    }
+    
      	
  }
  

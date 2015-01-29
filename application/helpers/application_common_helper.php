@@ -59,3 +59,18 @@ if ( ! function_exists('application_table_data'))
      		return  $returnObject;
      	}	
 }
+if (!function_exists('function_food_prefrence')){
+	function function_food_prefrence($retData=''){
+		$foot_prefrenceArray=array(
+			'--Select--',
+			'vegetarian',
+			'Non vegetarian'
+		);
+		if (empty($retData)){
+			return $foot_prefrenceArray;
+		}else{
+			return $foot_prefrenceArray[$retData];
+		}
+		
+	}
+}

@@ -27,6 +27,7 @@ $config['base_url']	= '';
 |
 */
 $config['index_page'] = '';
+$config['admin_emailid']='somu@tatwaa.in';
 
 
 /*

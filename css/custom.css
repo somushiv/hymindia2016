@@ -8,4 +8,11 @@
          border:1px solid #8B8B8A;margin:10px;background-color:#ffffff}
 .homepage-loginblock .input-group, .homepage-loginblock input[type=submit]{margin-top:10px}
 .width20{width:20%}
+.dashboard-icon{
+    float: none;
+    margin: 0 auto;
+	text-align:center;
+	color:#8C9999;
+	padding:10px;
+}
 
