@@ -103,6 +103,11 @@ class App_auth {
         $sessionArray=$this->ciObject->session->userdata('usersession');
         return $sessionArray['userid'];
     }   
+    function appUserMode(){
+        $this->ciObject->load->library('session');
+        $sessionArray=$this->ciObject->session->userdata('usersession');
+        return $sessionArray['delegates_mode'];
+    }   
     function appUsergroupid(){
         $this->ciObject->load->library('session');
         $sessionArray=$this->ciObject->session->userdata('usersession');
