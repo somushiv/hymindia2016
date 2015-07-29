@@ -2,10 +2,11 @@
 <head>
 <style>
 body {font-family: sans-serif;
-    font-size: 10pt;
+    font-size: 12pt;
+     line-height: 120%;
     
 }
-p {    margin: 0pt;
+p {    margin: 10pt;
 }
 td.logo{background-color:#000000}
 .outertable{border:2px solid #FE9800;}
@@ -17,9 +18,26 @@ th{width:20%}
 </style>
 </head>
 <body>
-<table width="800" border="0" cellpadding="0" cellspacing="0" class="outertable">
+<p>Dear <?php echo $fullname; ?>
+
+<p>
+Welcome to Utsav- A celebration! </p>
+<p>An event which will witness the HYM international and the National Agm of India in 2016. Congratulations for successfully logging in to begin your registration process.</p>
+
+<p>The id given to your registration will be a reference is for our records and help tracking your payments.</p>
+ <p>Please note this and mention it in any communication with regard to your registration.
+</p>
+
+<p>Once you login with your username and password you will find a menu on the dash board, 
+this will enable you to fill details of partner registration, event registration, accommodation 
+and so on. Please select the required options.</p>
+
+<p>For any assistance please get in touch with the committee at <a href="mailto:hym@hymindia.org">hym@hymindia.org</a> or <a href="mailto:gopal@npl.in">gopal@npl.in</a></p>
+
+
+<table width="800" border="1" cellpadding="0" cellspacing="0" class="outertable">
 <tr>
-<td class="logo" colspan="2"><img src="/images/hym_inida_logo.png" alt="HYM2016 Logo" title="HYM2012 logo" /> <?php echo date("d/m/Y");?></td>
+<td class="logo" colspan="2" style="background-color:#000000"><img src="http://hymindia.gubbachi.org/images/hym_inida_logo.png" alt="HYM2016 Logo" title="HYM2012 logo" /> <?php echo date("d/m/Y");?></td>
 
 </tr>
 <tr>
@@ -35,15 +53,14 @@ th{width:20%}
 	<td class="lefta"><?php echo $password; ?></td>
 </tr>
 <tr>
-	<td colspan="2">
-		<h4>Notes:</h4>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacinia tempor mi, eleifend bibendum nisl bibendum non. Etiam eu facilisis ligula, vel condimentum magna. Sed lobortis est quis urna commodo vulputate. Pellentesque sed nisl sit amet sapien hendrerit mollis vulputate a orci. Proin non dui risus. Donec bibendum ut massa sit amet congue. Donec porta non enim et fringilla. Proin sollicitudin consectetur urna eget sodales. Maecenas mattis tortor ut ante aliquam consectetur. Nam ac justo ut nisl bibendum consequat. Etiam eleifend lobortis leo sit amet blandit. Donec posuere tellus nunc. Pellentesque lacinia sit amet urna quis facilisis. </p>
-	</td>
-	
+	<th class="lefta"> HYM Event Code</th>
+	<td class="lefta"><?php echo $hymindiaid; ?></td>
 </tr>
 <tr>
 <td colspan="2" class="logo footer">
-<span class="color1">More Details :</span> <strong>(T)</strong> +91.9845188706, <strong>(E)</strong> contact@hymindia2016.org
+Best regards<br/>
+The Utsav team<br/>
+HYM and NAGM India<br/>
 </td>
 </tr>
 </table>

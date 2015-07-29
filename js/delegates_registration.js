@@ -13,4 +13,15 @@ $('#delegates_country').change(function(){
 	}
 	
 });
+
+$("#delegates_firstname").on('keyup blur', function (e) {
+    $("#spanLengthValidation").text("");
+    
+    $.get("/getTime", function (delegate_registration) {
+          // update the textarea with the time
+          alert(delegate_registration);
+          $("#delegates_firstname").html("Time on the server is:" + time);
+        });
+});
+
 });

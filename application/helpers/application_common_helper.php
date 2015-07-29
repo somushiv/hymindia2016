@@ -1,4 +1,7 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 /**
  * Bonfire
  *
@@ -12,7 +15,6 @@
  * @since     Version 1.0
  * @filesource
  */
-
 //--------------------------------------------------------------------
 
 /**
@@ -36,41 +38,42 @@
  * @link       http://guides.cibonfire.com/helpers/array_helpers.html
  *
  */
+if (!function_exists('application_table_data')) {
 
-if ( ! function_exists('application_table_data'))
-{
-	function application_table_data($table_name='',$key_id='',$display_value='',$return_key=''){
-     	$where='';
-     	 $ci=& get_instance();
-     	if (!empty($return_key)){
-     		$where = " where {$key_id}={$return_key}";
-     	}
-     	$queryString="select * from {$table_name} {$where} order by {$key_id}";
-     	$queryObject=$ci->db->query($queryString);
-     		if (!empty($return_key)){
-     			$returnObject=$queryObject->row_array();
-     		}else{
-     			$returnObject=array();
-     			$returnObject[]='-- Select --';
-     			foreach ($queryObject->result_array() as $row){
-     				$returnObject[$row[$key_id]]=$row[$display_value];
-     			}
-     		}
-     		return  $returnObject;
-     	}	
+    function application_table_data($table_name = '', $key_id = '', $display_value = '', $return_key = '') {
+        $where = '';
+        $ci = & get_instance();
+        if (!empty($return_key)) {
+            $where = " where {$key_id}={$return_key}";
+        }
+        $queryString = "select * from {$table_name} {$where} order by {$key_id}";
+        $queryObject = $ci->db->query($queryString);
+        if (!empty($return_key)) {
+            $returnObject = $queryObject->row_array();
+        } else {
+            $returnObject = array();
+            $returnObject[] = '-- Select --';
+            foreach ($queryObject->result_array() as $row) {
+                $returnObject[$row[$key_id]] = $row[$display_value];
+            }
+        }
+        return $returnObject;
+    }
+
 }
-if (!function_exists('function_food_prefrence')){
-	function function_food_prefrence($retData=''){
-		$foot_prefrenceArray=array(
-			'--Select--',
-			'vegetarian',
-			'Non vegetarian'
-		);
-		if (empty($retData)){
-			return $foot_prefrenceArray;
-		}else{
-			return $foot_prefrenceArray[$retData];
-		}
-		
-	}
+if (!function_exists('function_food_prefrence')) {
+
+    function function_food_prefrence($retData = '') {
+        $foot_prefrenceArray = array(
+            '--Select--',
+            'vegetarian',
+            'Non vegetarian'
+        );
+        if (empty($retData)) {
+            return $foot_prefrenceArray;
+        } else {
+            return $foot_prefrenceArray[$retData];
+        }
+    }
+
 }

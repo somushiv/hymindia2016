@@ -5,14 +5,122 @@
 .hym-responsive{width:100%}
 
 .homepage-loginblock{
-         border:1px solid #8B8B8A;margin:10px;background-color:#ffffff}
+    border:1px solid #8B8B8A;margin:10px;background-color:#ffffff}
+.pwd-reset-block {
+    margin:10px;background-color:#ffffff
+}
 .homepage-loginblock .input-group, .homepage-loginblock input[type=submit]{margin-top:10px}
+.pwd-reset-block .input-group, .pwd-reset-block input[type=submit]{margin-top:10px}
 .width20{width:20%}
 .dashboard-icon{
     float: none;
     margin: 0 auto;
-	text-align:center;
-	color:#8C9999;
-	padding:10px;
+    text-align:center;
+    color:#8C9999;
+    padding:10px;
 }
 
+.footer2 { margin-top: 20px;background: #191919; padding: 15px 0; color: #777; font-size: 12px; }
+.footer2 a { color: #aaa; }
+.footer2 a:hover { color: #fff; }
+.footer2 p { margin: 0; }
+p.bs-callout.bs-callout-danger {
+    border-left: 4px solid #fe9800;
+    padding:2px 10px;
+}
+
+#callout-btndropdown-dependency h4 {
+    color:#2d548f;
+}
+
+span.packages-view-lnks a {
+    padding: 0 6px;
+    text-decoration: none;
+    color:#2d548f;
+}
+
+span.packages-view-lnks a:hover {
+    text-decoration: underline;
+}
+
+span.main-title {
+    font-size:19px;
+}
+
+span.packages-view-lnks a:active {
+    padding: 4px 6px;
+    background: #fe9800;
+    color:#fff;
+    border-radius: 3px;
+}
+
+.list-group-item i {
+    padding-right: 6px;
+}
+
+
+a.add span {
+    color: #fff;
+}
+
+/** Hide default drop-down label **/
+
+.custom-drop-down div.form-group label.control-label.col-xs-2 {
+    display:none;
+}
+
+.custom-drop-down div.form-group {
+    margin-bottom: 0px;
+}
+
+.payment-amount {
+    font-size: 12px;
+}
+.add-text {
+    color:#337ab7;
+}
+
+tbody tr.row-header td {
+    background:  #eee;
+}
+
+tbody tr.row-header td h5 {
+    margin-bottom: 4px;
+    margin-top: 4px;
+    padding:0px 5px;
+    font-size: 12px;
+    color: #000;
+    font-weight: bold;
+    text-shadow: 2px 2px #dedede;
+}
+
+tbody tr.sum {
+    background: #dff0d8;
+    color: #000;
+}
+tbody tr.sum:hover {
+    background: #dff0d8;
+    color: #000;
+}
+
+tbody tr.sum td b {
+    font-size:12px;
+}
+
+.table-responsive table.table.table-bordered.table-hover tbody tr td {
+    padding:3px;
+    font-size: 13px;
+}
+
+
+.table-responsive table.table.table-bordered.table-hover thead th, .table-responsive table.table.table-bordered.table-hover tbody th {
+    font-size: 13px;
+    background:none repeat scroll 0 0 #f7f7f7;
+    color: #4172a5;
+    padding:3px;
+}
+
+.user-dashboard {
+    width:15%;
+}
+.user-dashboard-font{font-size:.9em !important}

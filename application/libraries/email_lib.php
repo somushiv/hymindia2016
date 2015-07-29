@@ -28,11 +28,11 @@ class email_lib {
     $CI->load->library('email');  
     $CI->email->clear();
      $e_config['protocol']='smtp';
-     $e_config['smtp_host']='ssl://smtp.gmail.com';
+     $e_config['smtp_host']='ssl://cpanel29.interactivedns.com';
      $e_config['smtp_port']='465';
      $e_config['smtp_timeout']='30';
-     $e_config['smtp_user']='somu@tatwaa.in';
-     $e_config['smtp_pass']='factor8';
+     $e_config['smtp_user']='registration@hymindia.org';
+     $e_config['smtp_pass']='hymindia@123';
      $e_config['useragent']='mutt';
     //$e_config['protocol'] = 'sendmail';
   //  $e_config['mailpath'] = '/usr/sbin/sendmail';
