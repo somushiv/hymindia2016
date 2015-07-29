@@ -60,26 +60,20 @@ class Delegate_registration extends CI_Controller {
         $data['country_array'] = getCountryByCode(NULL);
         $data['country_code'] = $country_details_arr['country_code'];
 
-        $this->form_validation->set_rules('delegates_firstname', 'First Name', 'trim|required');
-        $this->form_validation->set_rules('delegates_title', 'Title', 'callback_title_check');
-        $this->form_validation->set_rules('delegates_surname', 'Surname', 'trim|required');
-        $this->form_validation->set_rules('delegates_post', 'Delegates Post', 'trim');
-        $this->form_validation->set_rules('delegates_clubnumber', 'Club Number', 'trim|required');
-        $this->form_validation->set_rules('delegates_emailid', 'Email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('delegates_mobile', 'Mobile Number', 'trim|required|is_numeric');
-        $this->form_validation->set_rules('delegates_address1', 'Street Name', 'trim|required');
-        $this->form_validation->set_rules('delegates_address2', 'Address', 'trim|required');
-        $this->form_validation->set_rules('delegates_city', 'City', 'trim|required');
-        $this->form_validation->set_rules('delegates_postalcode', 'Postal Code', 'trim|required|is_numeric');
-        $this->form_validation->set_rules('delegates_address1', 'Street Name', 'trim|required');
+        
 
 
-        if ($this->form_validation->run() == FALSE) {
+        
+        	
+        	$this->template->add_js('js/validator.min.js',"import", FALSE, TRUE);
         	$this->template->add_js('js/registrationvalidation.js',"import", FALSE, TRUE);
             $this->template->write_view("content", "delegate_registration_view", $data);
             $this->template->render();
-        } else {
-            $passwordGenerated = $this->app_auth->password_generate($this->input->post('delegates_firstname'));
+       
+    }
+     function updatedelegate_registration(){
+     	
+     	$passwordGenerated = $this->app_auth->password_generate($this->input->post('delegates_firstname'));
             //echo $passwordGenerated;
             // exit;
             $enc_password = $this->app_auth->retPassword($passwordGenerated);
@@ -90,9 +84,7 @@ class Delegate_registration extends CI_Controller {
             //display success message
             $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Thank you for registering. Please check email for further details.</div>');
             redirect(base_url());
-        }
-    }
-
+     }
     
     function validedatemail(){
     	$email = mysql_real_escape_string(strtolower($_POST["email"]));

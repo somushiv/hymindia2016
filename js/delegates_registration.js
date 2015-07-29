@@ -1,5 +1,6 @@
 //Delegates Registration Form JS file
 $( document ).ready(function() {
+	
 $('#delegates_mode').hide();
 
 $('#delegates_country').change(function(){

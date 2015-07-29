@@ -1,4 +1,9 @@
 $(document).ready(function () {
+	$('#myForm').validator().on('submit', function (e) {
+		  if (e.isDefaultPrevented()) {
+			  window.scrollTo(0, 0);
+			  }
+	});
 	$("#delegates_emailid").blur(function() {
         //gets the value of the field
         var email = $("#delegates_emailid").val();
