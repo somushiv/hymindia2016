@@ -680,27 +680,26 @@ if (!function_exists('fun_transporation_mode')){
 }
 
 function pagenavigation(){
-	return ' <nav class="navbar navbar-default">
-    	<div class="btn-group pull-right">
+	return ' <nav class="navbar-default">
+    	 
     	
-  <button type="button" class="btn btn btn-primary">Dropdown Registration</button>
-  <button type="button" class="btn btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-    <span class="caret"></span>
-    <span class="sr-only">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="/delegate_partner/register">Spouse/Partner</a></li>
-    <li><a href="/event_registration/registration_form">Event Registration</a></li>
-    <li><a href="/delegate_accommodation">Accommodation</a></li>
-    <li><a href="/delegate_tours">Tours/Travel</a></li>
-    <li><a href="/delegate_transporation/registration">Pickup/Drop</a></li>
-    <li><a href="/daytours_registration/registration">Day Tours</a></li>
+  
+  <ul class="hymmenu nav navbar-nav" role="menu">
+  <li><a href="/dashboard"><button type="button" class="btn btn btn-primary"><span class="glyphicon glyphicon-home"></span></button></a></li>
+  <li><a href="/dashboard/dashboardview/1"><button type="button" class="btn btn btn-primary"><span class="glyphicon glyphicon-envelope"></span></button></a></li>
+  <li>&nbsp;&nbsp;&nbsp;</li>
+  <li><a href="/delegate_partner/register" ><button type="button" class="btn btn btn-primary">Spouse/Partner</button></a></li>
+    <li><a href="/event_registration/registration_form"><button type="button" class="btn btn btn-primary">Event Registration</button></a></li>
+    <li><a href="/delegate_accommodation"><button type="button" class="btn btn btn-primary">Accommodation</button></a></li>
+    <li><a href="/delegate_tours"><button type="button" class="btn btn btn-primary">Tours/Travel</button></a></li>
+    <li><a href="/delegate_transporation/registration"><button type="button" class="btn btn btn-primary">Pickup/Drop</button></a></li>
+    <li><a href="/daytours_registration/registration"><button type="button" class="btn btn btn-primary">Day Tours</button></a></li>
     
     
   </ul>
   
- &nbsp; <a href="/dashboard/dashboardview/1"><button type="button" class="btn btn btn-primary">Email</button></a>
+<div class="clearfix"></div>
   
-</div>
+
     </nav>';
 }
