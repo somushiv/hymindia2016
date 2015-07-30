@@ -1,9 +1,13 @@
 <div class="row">
     <?php if (isset($profile)) echo $profile; ?>
     <form method="post" action="/delegate_accommodation/update" id="loginform" class="form-horizontal">
-        <div class="col-sm-offset-1 col-lg-6 col-sm-6">
+        <div class="col-sm-offset-0 col-lg-9 col-sm-9">
          <?php echo pagenavigation(); ?>
             <div class="panel panel-default pwd-reset-block">
+            <div class='alert alert-info'>
+            Early check in and late check out will incur additional charges as well
+
+            </div>
         <div class="panel-heading">Accomodation</div>
 
                 <div class="panel-body">
@@ -53,7 +57,7 @@
                         </div>
                         <div class="col-lg-7 col-sm-7">
                         	 <a href="/delegate_tours" class="btn btn-primary">Skip</a>
-                        	<input type="submit" class="btn btn-primary" />
+                        	<input type="submit" class="btn btn-primary" value="submit selection"/>
                         </div>
                      </div>   
 

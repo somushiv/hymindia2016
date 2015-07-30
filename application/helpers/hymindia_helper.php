@@ -563,7 +563,7 @@ if (!function_exists('accdates')){
 			0=>''
 		);
 		for($i=$start;$i<=$end;$i++){
-			$returnDate[]="10/".$i."/2016";
+			$returnDate[]=$i."/10/2016";
 		}
 		return $returnDate;
 	}
@@ -613,8 +613,8 @@ if (!function_exists('daytourdates')){
 	function daytourdates($tourValue=null){
 		$options =array(
 			0=>"-- Select --",
-			1=>"10/14/2016",
-			2=>"10/15/2016"
+			1=>"14/10/2016",
+			2=>"14/10/2016"
 		);
 		if (isset($tourValue)) {
             return $options[$tourValue];
@@ -692,8 +692,9 @@ function pagenavigation(){
     <li><a href="/event_registration/registration_form"><button type="button" class="btn btn btn-primary">Event Registration</button></a></li>
     <li><a href="/delegate_accommodation"><button type="button" class="btn btn btn-primary">Accommodation</button></a></li>
     <li><a href="/delegate_tours"><button type="button" class="btn btn btn-primary">Tours/Travel</button></a></li>
-    <li><a href="/delegate_transporation/registration"><button type="button" class="btn btn btn-primary">Pickup/Drop</button></a></li>
+    
     <li><a href="/daytours_registration/registration"><button type="button" class="btn btn btn-primary">Day Tours</button></a></li>
+    <li><a href="/delegate_transporation/registration"><button type="button" class="btn btn btn-primary">Pickup/Drop</button></a></li>
     
     
   </ul>

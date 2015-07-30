@@ -90,7 +90,7 @@ class Delegate_Transporation extends CI_Controller {
    			
    			$this->insert_trandata($delegate_id,1);
    		}
-        $displayTable='<table border="0" class="table">';
+        $displayTable='<table border="0" class="table" >';
         $transporation_stage=0;
         $mode_text='';
         $mode_text1='';
@@ -111,9 +111,16 @@ class Delegate_Transporation extends CI_Controller {
         		
         	}
         	
-        		
+        	//Cost Display
+        	$pickdrop=getTransporationModes();
+        	$pickDrop_Cost=transportionprice();
+        	$picDropDisplay='';
+        	foreach ($pickdrop as $key=>$value){
+        		if ($key>0)
+        			$picDropDisplay.="&nbsp;&nbsp;<strong>{$value}: </strong>Rs. ".$pickDrop_Cost[$key];
+        	}
         	
-        	
+        	$data['picDropDisplay']=$picDropDisplay;
         	$idrefArray[]=$row->transporation_id;
         	$displayTable.='<tr>';
         	$displayTable.='<td>'.getRelationships($row->relationship).'</td>';

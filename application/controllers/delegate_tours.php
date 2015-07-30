@@ -74,7 +74,7 @@ class Delegate_Tours extends CI_Controller {
        					where tours_is_pre_post={$key} and country_mode={$country_mode} and published=1");
        			$dateDropDown=formDateTimeDropDown($tour_dates,'tour_'.$key,false);
        			$checkbox="<input type='checkbox' id='tour_".$key."' name='tour_".$key."' value='1' {$checked} class='hideme'/>";
-       			$tour_type_data.='<div class="" style="clear:both"><div class="alert alert-danger" style="margin:0px 0px;">'.$checkbox.'&nbsp;'.$value.' Tour</div>
+       			$tour_type_data.='<div class="" style="clear:both"><div class="alert alert-info" style="margin:0px 0px;">'.$checkbox.'&nbsp;'.$value.' Tour</div>
        				
        				<table class="table table-bordered tourtable" border="0" id="tourmode_'.$key.'">
        				<tr class="active"><th>Places</th><th>Date</th><th colspan="2">Single</th><th colspan="2">Double</th></tr>';
