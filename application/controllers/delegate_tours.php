@@ -66,15 +66,15 @@ class Delegate_Tours extends CI_Controller {
        			//Edit Validation
        			$fieldRow=$this->viewValidate($data['loginuser'],$key);
        			$checked='';
-       			if (!empty($fieldRow->tour_mode))
+       			//if (!empty($fieldRow->tour_mode))
        				$checked=' checked ';
        			
        			
        			$queryObject=$this->db->query("select * from tbl_tours_places 
        					where tours_is_pre_post={$key} and country_mode={$country_mode} and published=1");
        			$dateDropDown=formDateTimeDropDown($tour_dates,'tour_'.$key,false);
-       			$checkbox="<input type='checkbox' id='tour_".$key."' name='tour_".$key."' value='1' {$checked}/>";
-       			$tour_type_data.='<div class="" style="clear:both">'.$checkbox.'&nbsp;'.$value.' Tour
+       			$checkbox="<input type='checkbox' id='tour_".$key."' name='tour_".$key."' value='1' {$checked} class='hideme'/>";
+       			$tour_type_data.='<div class="" style="clear:both"><div class="alert alert-danger" style="margin:0px 0px;">'.$checkbox.'&nbsp;'.$value.' Tour</div>
        				
        				<table class="table table-bordered tourtable" border="0" id="tourmode_'.$key.'">
        				<tr class="active"><th>Places</th><th>Date</th><th colspan="2">Single</th><th colspan="2">Double</th></tr>';
@@ -89,11 +89,12 @@ class Delegate_Tours extends CI_Controller {
        				if (($fieldRow->tour_places_id==$row->tours_places_id)&&($fieldRow->couple_mode==2))
        					$checked2=' checked ';
        			}
-       				
+       				$toura_places=$row->tours_places.'&nbsp;<a href="'.$row->place_link.'" class="pull-right" 
+       				target="_blank"> Click to Know More </a>';
        				
        				$tour_type_data.='<tr>
        											
-       											<td>'.$row->tours_places.'</td>
+       											<td>'.$toura_places.'</td>
        											<td>'.$row->tours_date.'</td>
        												<td class="text-right">'.number_format($row->cost_per_head).'</td>
        												<td class="text-center"><input type="radio" name="tour_place_'.$key.'" value="'.$row->tours_places_id.'-1" '.$checked1.'/></td>

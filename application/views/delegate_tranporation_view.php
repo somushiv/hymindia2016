@@ -153,7 +153,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-lg-8 col-sm-8">
                            		<a href="/dashboard" class="btn btn-primary">Skip</a>
-                                <input id="btn_add" type="submit" name="btn_add" type="submit" class="btn btn-primary" value="Submit" />
+                                <input id="btn_add" type="submit" name="btn_add" type="submit" class="btn btn-primary" value="Submit selection" />
                            
                         </div>
                     </div>

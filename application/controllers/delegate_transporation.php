@@ -130,7 +130,7 @@ class Delegate_Transporation extends CI_Controller {
             <div class="form-group">
                 <div class="col-sm-offset-4 col-lg-8 col-sm-8 text-left">
                     <input type="hidden" name="step1" value="3" />
-                    <input id="btn_add" type="submit" name="btn_add" type="submit" class="btn btn-primary" value="Save/Next" />                    
+                    <input id="btn_add" type="submit" name="btn_add" type="submit" class="btn btn-primary" value="Submit selection" />                    
                 </div>
             </div>
         

@@ -43,7 +43,7 @@
                     <input type='hidden' name="step1" value="2"/>
                     <input type='hidden' name="country_code" id="country_code" value="<?php echo $country_code; ?>"/>
                     <a href="/delegate_accommodation" class="btn btn-primary">Skip</a>
-                    <button type="submit" id="submit-event-reg" class="btn btn-primary" >Register</button>
+                    <button type="submit" id="submit-event-reg" class="btn btn-primary" >Submit selection</button>
                 </div>
             </div> 
             </form>

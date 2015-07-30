@@ -37,7 +37,7 @@
             <div class="panel-body">
                 <div class="pull-right">
                     
-                    <button type="submit" id="submit-event-reg" class="btn btn-primary" >Register</button>
+                    <button type="submit" id="submit-event-reg" class="btn btn-primary" >Submit selection</button>
                 </div>
             </div> 
             </form>
