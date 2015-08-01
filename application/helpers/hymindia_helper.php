@@ -704,3 +704,60 @@ function pagenavigation(){
 
     </nav>';
 }
+
+function payment_panel($payment_cost){
+ $totalCost=0;
+        foreach ($payment_cost as $key=>$value){
+        	//if ($key!="acc_cost_total"){
+        		$totalCost=$totalCost+$value;
+        	//}
+        }
+	$return='<div class="panel panel-info"> <div class=" panel-heading text-center">Payment Details</div>
+
+                <div class="panel-body">
+                	<table  class="table table-bordered">
+                		<tr>
+                			<th>#</th>
+                			<th>Payment Head</th>
+                			<th>Amount</th>
+                		</tr>
+                		<tr>
+                			<td>1</td>
+                			<td>Event Registrion</td>
+                			<td class="rightalign">'.number_format($payment_cost['event_registration'],2).'</td>
+                		</tr>
+                			<tr>
+                			<td>2</td>
+                			<td>Tours (Pre/Post)</td>
+                			<td class="rightalign">'.number_format($payment_cost['tour_total_cost'],2).'</td>
+                		</tr>
+                			<tr>
+                			<td>3</td>
+                			<td>Day Trip</td>
+                			<td class="rightalign">'.number_format($payment_cost['daytourTotalCost'],2).'</td>
+                		</tr>
+                		<tr>
+                			<td>4</td>
+                			<td>Drop/Pickup</td>
+                			<td class="rightalign"> '.number_format($payment_cost['trans_details'],2).'</td>
+                		</tr>
+                			<tr>
+                			<td>5</td>
+                			<td>Accommodation</td>
+                			<td class="rightalign">'.number_format($payment_cost['acc_cost_total'],2).'</td>
+                		</tr>
+                		<tr style="background-color:#F5F4F4">
+                			<td></td>
+                			<td>Total Amount</td>
+                			<td class="rightalign">'.number_format($totalCost,2).'</td>
+                		</tr>
+                		<tr style="background-color:#cccccc">
+                			<td></td>
+                			<td>Amount Paid</td>
+                			<td class="rightalign"></td>
+                		</tr>
+                	</table>
+                	
+                </div></div>';
+	return $return;
+}

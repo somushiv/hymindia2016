@@ -116,7 +116,7 @@ class Delegate_Tours extends CI_Controller {
     }
     public function  viewValidate($delegate_id=0,$tour_mode=0){
     $daytour_object=$this->db->query('select * from tbl_tour_registration 
-    			where delegate_id='.$delegate_id.' and tour_mode='.$tour_mode);
+    			where delegate_id='.$delegate_id.' and tour_mode='.$tour_mode.' and status=0');
         
         if ($daytour_object->num_rows()){
         	$fieldRow=$daytour_object->row();
@@ -153,7 +153,7 @@ class Delegate_Tours extends CI_Controller {
         );
         $queryObject=$this->db->query('select * from tbl_tour_registration where
         	tour_mode=1 and
-        	delegate_id='.$queryArray['delegate_id']);
+        	delegate_id='.$queryArray['delegate_id'].' and status=0');
         if ($queryObject->num_rows()==0){
         	$this->db->insert('tbl_tour_registration',$data_arr);
         }else{
@@ -178,7 +178,7 @@ class Delegate_Tours extends CI_Controller {
         );
         $queryObject=$this->db->query('select * from tbl_tour_registration where
         	tour_mode=2 and
-        	delegate_id='.$queryArray['delegate_id']);
+        	delegate_id='.$queryArray['delegate_id'].' and status=0');
         if ($queryObject->num_rows()==0){
         	$this->db->insert('tbl_tour_registration',$data_arr);
         }else{

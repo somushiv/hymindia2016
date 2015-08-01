@@ -28,7 +28,7 @@ class Delegate_Accommodation extends CI_Controller {
         $this->load->helper("form");
         $this->load->helper('hymindia');
         $country_mode=hlpcountry_mode($this->app_auth->appUserCountryCode());
-        $accommodation_object=$this->db->query('select * from tbl_accomodation where delegate_id='.$data['loginuser']);
+        $accommodation_object=$this->db->query('select * from tbl_accomodation where delegate_id='.$data['loginuser'].' and status=0');
         
         if ($accommodation_object->num_rows()){
         	$fieldRow=$accommodation_object->row();
@@ -93,9 +93,13 @@ class Delegate_Accommodation extends CI_Controller {
     }
    function update(){
     
-   	$check_in_date_time=date("Y-m-d  H:i:s",strtotime($_POST['check_in_date_time'].' '.$_POST['check_in_date_time_hours'].':'.$_POST['check_in_date_time_minutes'].':00'));
-   	$check_out_date_time=date("Y-m-d  H:i:s",strtotime($_POST['check_out_date_time'].' '.$_POST['check_out_date_time_hours'].':'.$_POST['check_out_date_time_minutes'].':00'));
-   	$num_days = (strtotime($_POST['check_out_date_time']) - strtotime($_POST['check_in_date_time'])) / (60 * 60 * 24);
+   	
+   	$check_in_date_time=DateTime::createFromFormat("d/m/Y H:i:s", $_POST['check_in_date_time'].' '.$_POST['check_in_date_time_hours'].':'.$_POST['check_in_date_time_minutes'].':00');
+   	$check_out_date_time=DateTime::createFromFormat("d/m/Y H:i:s", $_POST['check_out_date_time'].' '.$_POST['check_out_date_time_hours'].':'.$_POST['check_out_date_time_minutes'].':00');
+   	$check_in_date_time=$check_in_date_time->format('Y-m-d H:i:s');
+   	$check_out_date_time=$check_out_date_time->format('Y-m-d H:i:s');
+   
+   	$num_days = round(((strtotime($check_out_date_time) - strtotime($check_in_date_time)) / (60 * 60 * 24)));
    	$data = array(
    		'accomodation_place_id'=>$_POST['acc'],
    		'check_in_date_time'=>$check_in_date_time,
@@ -105,6 +109,7 @@ class Delegate_Accommodation extends CI_Controller {
    		'num_days'=>$num_days,
    		
    	);
+   		
    	if ($_POST['accomodation_id']>0){
    		$this->db->where('accomodation_id',$_POST['accomodation_id']);
    		$this->db->update('tbl_accomodation',$data);

@@ -55,7 +55,7 @@ class application_common_libs {
     /*
      * Delegate Profile Display
      */
-    function delegate_profile_display(){
+    function delegate_profile_display($extra_display=''){
        $this->ci->load->library('app_auth');
         
         $delegatesObject = $this->getDelegateData($this->ci->app_auth->appUserid());
@@ -85,7 +85,7 @@ class application_common_libs {
             <div class='panel-footer'>
                 ".$profile_alert."
             </div>
-        </div>
+        </div>{$extra_display}
 
     </div>
 	";

@@ -62,7 +62,7 @@ class Event_Registration extends CI_Controller {
         }
         $usermode_manage=0;
         $queryObject=$this->db->query('select * from tbl_delegates_event_registration
-			where delegate_id='.$user_id);
+			where delegate_id='.$user_id.' and status=0');
        	if ($queryObject->num_rows()>0)
        		$usermode_manage=1;
         
@@ -110,7 +110,7 @@ class Event_Registration extends CI_Controller {
         		package_details_id='{$item->packages_details_id}' 
         		class='attendees' eventcost_s='{$item->packages_cost_s}' eventcost_d='{$item->packages_cost_d}'
         		>";
-        		$coupleArray=array('Select','Self','Partner');
+        		$coupleArray=array('Select','Single','Double');
         		for($j=0;$j<3;$j++){
         		$fieldRow=$this->updateobject($item->packages_details_id);
         		$select='';
@@ -158,7 +158,7 @@ class Event_Registration extends CI_Controller {
 	function updateobject($package_id=0){
 		$queryObject=$this->db->query('select * from tbl_delegates_event_registration
 			where delegate_id='.$this->app_auth->appUserid().'
-			and package_id='.$package_id);
+			and package_id='.$package_id.' and status=0');
 		if ($queryObject->num_rows()==0){
 			$fieldRowA = $this->db->list_fields('daytour_registration');
         	$fieldRow=array();
@@ -171,6 +171,15 @@ class Event_Registration extends CI_Controller {
 		}
 		return $fieldRow;
 	}
+	function validateInsert($delegate_id,$package_id){
+		$queryObject=$this->db->query('select * from tbl_delegates_event_registration 
+			where delegate_id='.$delegate_id.' and package_id='.$package_id.' and status=0');
+		if ($queryObject->num_rows()==0){
+			return 0;
+		}else{
+			return 1;
+		}
+	}
 	
 	function update_event_registration(){
 		
@@ -182,20 +191,32 @@ class Event_Registration extends CI_Controller {
 				
 				$data['package_id'] =$tmpArray[1];
 				$data['delegate_numbers'] =$postvalue;
-				if ($_POST['usermode_manage']==0){
-				$this->db->insert('tbl_delegates_event_registration',$data);
-				redirect('/delegate_accommodation');
+				$validateInsert=$this->validateInsert($data['delegate_id'], $data['package_id']);
+				echo $_POST['usermode_manage'].' '.$validateInsert.'<br/>';
+				if (($_POST['usermode_manage']==0)&&($validateInsert==0)){
+					$this->db->insert('tbl_delegates_event_registration',$data);
+				
+				}else if (($_POST['usermode_manage']==1)&&($validateInsert==0)){
+					$this->db->insert('tbl_delegates_event_registration',$data);
+				
 				}else{
 					$wharearray=array(
 						'delegate_id'=>$data['delegate_id'],
-						'package_id'=>$data['package_id']
+						'package_id'=>$data['package_id'],
+						'status'=>0
 					);
 					$this->db->update('tbl_delegates_event_registration',$data,$wharearray);
-					redirect('/dashboard');
+					
 				}
 			}
 			
+			
 		}
+	if ($_POST['usermode_manage']==0){
+			redirect('/delegate_accommodation');
+			}else{
+				redirect('/dashboard');
+			}
 		
 		
 	}

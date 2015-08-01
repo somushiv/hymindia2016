@@ -69,7 +69,7 @@ class Daytours_registration extends CI_Controller {
 	function validatedata($daytours_id,$loginuser,$relationship_id){
 	$daytour_object=$this->db->query('select * from daytour_registration where 
 				delegate_id='.$loginuser.' and 
-				daytour_reference='.$daytours_id.' and relationship_id=	'.$relationship_id);
+				daytour_reference='.$daytours_id.' and relationship_id=	'.$relationship_id.' and status=0');
         
         if ($daytour_object->num_rows()){
         	$fieldRow=$daytour_object->row();
@@ -158,7 +158,8 @@ class Daytours_registration extends CI_Controller {
         			$upArray=array(
 						'relationship_id'=>$dataArray['relationship_id'],
 						'daytour_reference'=>$dataArray['daytour_reference'],
-						'delegate_id'=>$dataArray['delegate_id']
+						'delegate_id'=>$dataArray['delegate_id'],
+        				'status'=>0
 						);
         			$this->db->update('daytour_registration',$dataArray,$upArray);
         		}
@@ -171,7 +172,7 @@ class Daytours_registration extends CI_Controller {
 		$checkObject=$this->db->query('select * from daytour_registration
 		where relationship_id='.$dataArray['relationship_id'].' and
 		daytour_reference='.$dataArray['daytour_reference'].' and
-		delegate_id='.$dataArray['delegate_id']);
+		delegate_id='.$dataArray['delegate_id'].' and status=0');
 		if ($checkObject->num_rows()==0){
 			return 0;
 		}else{

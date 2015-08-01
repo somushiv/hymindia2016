@@ -44,7 +44,7 @@ class Dashboard extends CI_Controller {
     public function dashboardview($mailmode=0) {
 
 
-        $data['profile'] = $this->application_common_libs->delegate_profile_display();
+        
         $delegate_id= $this->app_auth->appUserid();     
         $data['country_code'] = $this->app_auth->appUserCountryCode();
 		$country_code=hlpcountry_mode($data['country_code']);
@@ -77,12 +77,14 @@ class Dashboard extends CI_Controller {
         $registration_object=$this->db->query("select * from tbl_delegates_event_registration a 
         									join  tbl_packages_details b
         									on a.package_id=b.packages_details_id
-        									where a.delegate_id={$delegate_id} order by a.package_id");
+        									where a.delegate_id={$delegate_id} and a.status=0 order by a.package_id");
         $titleDisplay='';
         $i=0;
         $total=0;
+        $payment_event_registration=array();
         $paymentArray=array();
         foreach ($registration_object->result() as $row){
+        	
         	//Releationship
         	$displayText="";
         	$j='';
@@ -112,15 +114,18 @@ class Dashboard extends CI_Controller {
         		<td class='text-right' {$clearline}>{$package_cost1}</td>
         	</tr>";
         			$total=$total+$package_cost;
+        			$payment_event_registration[]=array($row->delegate_event_regid,$row->packages_details_id,$package_cost,$row->payment_status);
         	}
         }
+        $payment_accomodation=array();
         $paymentArray['event_registration']=$total;
         $data['event_registration_total']=$total;
         $data['event_registration']=$event_registration;
         // Get Accomodation Details
        $acc_details='';
         $acc_object=$this->db->query("select * from tbl_accomodation a join tbl_accomodation_place b on
-        	a.accomodation_place_id=b.accomodation_place_id and b.country_mode={$country_code} and a.delegate_id={$delegate_id}");
+        	a.accomodation_place_id=b.accomodation_place_id and b.country_mode={$country_code} and a.delegate_id={$delegate_id}
+        	and a.status=0");
         $i=1;
         $acc_cost_total=0;
         foreach ($acc_object->result() as $row){
@@ -139,12 +144,15 @@ class Dashboard extends CI_Controller {
          $data['acc_details'] =$acc_details;
          $data['acc_cost_total'] =$acc_cost_total;
          $paymentArray['acc_cost_total']=$acc_cost_total;
+          $payment_accomodation[]=array($row->accomodation_id,$row->traffi_type_id,$stay_cost,$row->payment_status,$row->num_days);
         // Geet Tour Details
         $tour_details='';
         $tour_object=$this->db->query('select * from tbl_tour_registration a join tbl_tours_places b
-        								on a.tour_places_id=b.tours_places_id and country_mode='.$country_code.' and a.delegate_id='.$delegate_id);
+        								on a.tour_places_id=b.tours_places_id and country_mode='.$country_code.' 
+        								and a.delegate_id='.$delegate_id.' and status=0');
         $i=1;
         $tour_total_cost=0;
+        $payment_tour=array();
         foreach($tour_object->result() as $row){
         	$tour_details.='<tr>';
         	$tour_details.='<td>'.$i.'</td>';
@@ -163,6 +171,7 @@ class Dashboard extends CI_Controller {
         	$tour_details.='</tr>';
         	$i++;
         	$tour_total_cost=$tour_total_cost+$cost;
+        	$payment_tour[]=array($row->delegate_tour_id,$row->tours_places_id,$cost,$row->payment_status,$row->couple_mode);
         }
         $data['tour_details'] = $tour_details;
         $data['tour_total_cost']=$tour_total_cost;
@@ -174,10 +183,11 @@ class Dashboard extends CI_Controller {
         $daytourObject=$this->db->query("select * from daytours_packages where country_mode={$country_code} and published=1");
         $i=1;
         $daytourTotalCost=0;
+        $payment_daytour=array();
         foreach ($daytourObject->result() as $rowtour){
         	
         	$tourPackageRegistrationObject=$this->db->query('select * from daytour_registration 
-        			where delegate_id='.$delegate_id.' and daytour_reference='.$rowtour->daytours_id);
+        			where delegate_id='.$delegate_id.' and daytour_reference='.$rowtour->daytours_id.' and status=0');
 		if ($tourPackageRegistrationObject->num_rows()>0){
 		$unitCost=0;
 		$day_trip.='<tr>';
@@ -188,11 +198,14 @@ class Dashboard extends CI_Controller {
         	foreach($tourPackageRegistrationObject->result() as $row){
         		if ($row->relationship_id==101){
         			$packageDisplay.="<li>".getRelationships(101)." <strong> Dated: </strong>".daytourdates($row->date_refrence)."</li>";
+        			$unitCost=$unitCost+$rowtour->tour_cost;
+        			$payment_daytour[]=array($row->daytour_registration_id,$rowtour->daytours_id,$rowtour->tour_cost,$row->payment_status,$row->relationship_id);
         		}else{
         		$partnerObject=$this->db->query('select * from tbl_delegate_partner where delegate_partner_id='.$row->relationship_id);
         		$partnerRow=$partnerObject->row();
         		$packageDisplay.="<li>".getRelationships($partnerRow->delagate_partner_rel)." <strong> Dated: </strong>".daytourdates($row->date_refrence)."</li>";
         		$unitCost=$unitCost+$rowtour->tour_cost;
+        		$payment_daytour[]=array($row->daytour_registration_id,$rowtour->daytours_id,$rowtour->tour_cost,$row->payment_status,$row->relationship_id);
         		}
         	}
         	$packageDisplay.="</ul>";
@@ -209,7 +222,7 @@ class Dashboard extends CI_Controller {
         
         //Transport details
         //Check for Number of people regestred in 
-        
+        $payment_transport=array();
 		$data['trans_details']='';
 		 $trans_details='';
         $tour_object=$this->db->query('select * from tbl_transporation where delegate_id='.$delegate_id.' order by transporation_stage');
@@ -231,6 +244,7 @@ class Dashboard extends CI_Controller {
         		$trans_details.='</ul></td>';
         		$trans_details.='<td>'.$pickCost.'</td></tr>';
         		$totCost=$totCost+$pickCost;
+        		$payment_transport[]=array($row->transporation_id,$row->transporation_mode,$pickCost,$row->payment_status,$row->relationship,$row->transporation_stage);
         		}
         	}
         	if ($row->transporation_stage==2){
@@ -247,6 +261,7 @@ class Dashboard extends CI_Controller {
         		$trans_details.='</ul></td>';
         		$trans_details.='<td>'.$dropCost.'</td></tr>';
         		$totCost=$totCost+$dropCost;
+        		$payment_transport[]=array($row->transporation_id,$row->transporation_mode,$pickCost,$row->payment_status,$row->relationship,$row->transporation_stage);
         		}
         	}
         	
@@ -259,10 +274,20 @@ class Dashboard extends CI_Controller {
 			$finalTotal=$finalTotal+$value;
 		}
 		$data['finalTotal']=$finalTotal;
+		$payment_reference_array=array(
+			$payment_event_registration,
+			$payment_accomodation,
+			$payment_tour,
+			$payment_daytour,
+			$payment_transport
+		);
+		$this->session->set_userdata('payment_reference_array',$payment_reference_array);
 		$this->session->set_userdata('payment_cost',$paymentArray);
         $data['loginuser'] = $this->app_auth->appUserid();
         $data['mailmode']=$mailmode;
         if ($mailmode==0){
+        	$data['profile'] = $this->application_common_libs->delegate_profile_display(payment_panel($paymentArray));
+        	//$data['payment_panel']=payment_panel($paymentArray);
         	$data['pagenavigation']=pagenavigation();
         $this->template->add_css('/css/font-awesome.min.css');
         $this->template->write_view("content", "dashboard", $data);
@@ -383,6 +408,7 @@ function sendregistrationmail($maildata, $delegate_id) {
         $acc_object=$this->db->query("select * from tbl_accomodation a join tbl_accomodation_place b on
         	a.accomodation_place_id=b.accomodation_place_id and b.country_mode={$country_code} and a.delegate_id={$delegate_id}");
         $i=1;
+        
         $acc_cost_total=0;
         foreach ($acc_object->result() as $row){
         	$acc_details.='<tr>';
@@ -435,6 +461,7 @@ function sendregistrationmail($maildata, $delegate_id) {
         $daytourObject=$this->db->query("select * from daytours_packages where country_mode={$country_code} and published=1");
         $i=1;
         $daytourTotalCost=0;
+       
         foreach ($daytourObject->result() as $rowtour){
         	
         	$tourPackageRegistrationObject=$this->db->query('select * from daytour_registration 
@@ -467,6 +494,7 @@ function sendregistrationmail($maildata, $delegate_id) {
         $data['day_trip'] = $day_trip;
         $data['daytourTotalCost'] = $daytourTotalCost;
         $paymentArray['daytourTotalCost']=$daytourTotalCost;
+       
         //Transport details
 		$data['trans_details']='';
 		 $trans_details='';
@@ -539,5 +567,10 @@ function sendregistrationmail($maildata, $delegate_id) {
     	$test=$this->application_common_libs->generate_hym_id("IN");
     	echo $test;
     }
-
+    
+	function testpaylib(){
+		$this->load->library("lib_payment");
+		$r=$this->lib_payment->process_list(0);
+		print_r($r);
+	}
 }

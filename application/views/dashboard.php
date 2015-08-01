@@ -2,6 +2,7 @@
 
     <?php if (isset($profile)) echo $profile; ?>
     
+    
    <?php 
    	if ($mailmode==0){
    ?>
@@ -9,6 +10,7 @@
     <!-- User Details -->
     <div class="col-xs-9 col-sm-9 pull-right">
    		 <?php echo pagenavigation(); ?>
+   		
     <?php }?>
      <?php 
      $mailpatch='';
